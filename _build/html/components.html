@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>System Components &mdash; Panels G4 Notes</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Panels G4 Notes" href="index.html" />
+    <link rel="next" title="SPI and I2C Communications" href="communications.html" />
+    <link rel="prev" title="Introduction" href="index.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/iorodeo_logo.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Panels G4 Notes</span></a></h1>
+        <h2 class="heading"><span>System Components</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">Introduction</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="communications.html">SPI and I2C Communications</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="system-components">
+<h1>System Components<a class="headerlink" href="#system-components" title="Permalink to this headline">¶</a></h1>
+<p>The prototype G4 system consists of four components:</p>
+<ul class="simple">
+<li>Display panels - 20 display panels, each panel has a four 8x8 20mm LED matrices.</li>
+<li>Test Arena - configurable planar arena which can accommodate 6 columns of panels.</li>
+<li>Demo Controller - simple Arduino Uno based controller which shows a moving stripe pattern.</li>
+<li>5V power supply (2.1mm center positive).</li>
+</ul>
+<div class="figure align-center">
+<img alt="_images/coleman_bundle.png" src="_images/coleman_bundle.png" />
+</div>
+<p>The <a class="reference external" href="http://mercurial.selenic.com">mercurial</a> repository of design files for
+G4 panels hardware can be found <a class="reference external" href="https://bitbucket.org/iorodeo/panels_g4_hardware/src">here</a>. Note, the design files
+for the PCBs use the <a class="reference external" href="http://www.kicad-pcb.org/display/KICAD/KiCad+EDA+Software+Suite">kicad</a> EDA
+software suite.</p>
+<p>The source code for the firmware used by the display panels and the demo controller
+can be found <a class="reference external" href="https://bitbucket.org/iorodeo/panels_g4_firmware/src">here</a>.</p>
+<div class="section" id="display-panels">
+<h2>Display Panels<a class="headerlink" href="#display-panels" title="Permalink to this headline">¶</a></h2>
+<p>A display panel consists of two sub-panel PCBs - the comm (communications) sub-panel and  the driver (display) sub-panel.</p>
+<div class="figure align-center">
+<img alt="_images/display_panels.png" src="_images/display_panels.png" />
+</div>
+<div class="section" id="driver-sub-panels">
+<h3>Driver Sub-Panels<a class="headerlink" href="#driver-sub-panels" title="Permalink to this headline">¶</a></h3>
+<p>The driver sub-panel has four atmega328 micro-controllers - one for each 8x8
+display matrix. Each micro-controller on the driver sub-panel is responsible
+for receiving pattern data from the comm sub-panel over I2C and displaying this
+data on its associated LED matrix. The four LED matrices which attach
+to the driver are ordered from  0 to 3 as shown in the image below.</p>
+<div class="figure align-center">
+<img alt="_images/atmega_driver_front.png" src="_images/atmega_driver_front.png" />
+</div>
+<p><a class="reference download internal" href="_downloads/driver.pdf"><tt class="xref download docutils literal"><span class="pre">Driver</span> <span class="pre">PCB</span> <span class="pre">Schematic</span></tt></a>.</p>
+</div>
+<div class="section" id="comm-sub-panels">
+<h3>Comm Sub-Panels<a class="headerlink" href="#comm-sub-panels" title="Permalink to this headline">¶</a></h3>
+<p>The comm sub-panel has a single atmega328 micro-controller which communicates
+with the system controller over SPI. The comm sub-panel is responsible for
+receiving pattern data from the controller (over SPI), it then splits the
+pattern data into four pieces (one for each LED matrix) ands sends this data on
+to the four atmega328 micro-controllers on it associated driver sub-panels over
+I2C.</p>
+<div class="figure align-center">
+<img alt="_images/atmega_comm_front.png" src="_images/atmega_comm_front.png" />
+</div>
+<p><a class="reference download internal" href="_downloads/comm.pdf"><tt class="xref download docutils literal"><span class="pre">Comm</span> <span class="pre">PCB</span> <span class="pre">Schematic</span></tt></a>.</p>
+</div>
+</div>
+<div class="section" id="test-arena">
+<h2>Test Arena<a class="headerlink" href="#test-arena" title="Permalink to this headline">¶</a></h2>
+<p>The test arena is used to connect the panels with the controller and to supply
+power to the panels. There are three headers which can be used to connected the panels to the
+display controller.</p>
+<ul class="simple">
+<li>P22 40-Pin (2x20) single SPI bus header.</li>
+<li>P23 60_Pin (2x30) six SPI bus header.</li>
+<li>P30 40-Pin (2x20) six SPI bus w/ common chip select lines.</li>
+</ul>
+<div class="figure align-center">
+<img alt="_images/test_arena.png" src="_images/test_arena.png" />
+</div>
+<p>5V power is supplied to the panels via 2.1mm DC jack, polarity is center positive.</p>
+<p>There are 5 sets of jumpers which can be used to configure the
+arena.  (To do document jumper functions - for now refer to the arena schematic.)</p>
+<p><a class="reference download internal" href="_downloads/arena.pdf"><tt class="xref download docutils literal"><span class="pre">Arena</span> <span class="pre">PCB</span> <span class="pre">Schematic</span></tt></a>.</p>
+</div>
+<div class="section" id="demo-controller">
+<h2>Demo Controller<a class="headerlink" href="#demo-controller" title="Permalink to this headline">¶</a></h2>
+<p>A demonstration controller, based on an Arduino Uno, is provided with the arena
+and panels.  The demonstration controller connects to header P22 on the arena and will
+display a moving stripe pattern in 16-level gray scale mode.  The panels (up to
+four) should be connected to header P1 when using the demo controller.
+Note, the demo controller requires 5V power via the USB connector on the
+Arduino Uno in order to operate.</p>
+<div class="figure align-center">
+<img alt="_images/demo_controller.png" src="_images/demo_controller.png" />
+</div>
+<p>A video of the demo controller connected to the test arena and displaying the moving stripe
+pattern is shown below.</p>
+<center>
+<object width="480" height="385"><param name="movie"
+value="http://www.youtube.com/v/SBqYZ3KdAUc&hl=en_US&fs=1&rel=0"></param><param
+name="allowFullScreen" value="true"></param><param
+name="allowscriptaccess" value="always"></param><embed
+src="http://www.youtube.com/v/vgf_y8ZDPE4?version=3&loop=1&playlist=vgf_y8ZDPE4"
+type="application/x-shockwave-flash" allowscriptaccess="always"
+allowfullscreen="true" width="480"
+height="385"></embed></object>
+</center></div>
+<div class="section" id="v-power-supply">
+<h2>5V Power Supply<a class="headerlink" href="#v-power-supply" title="Permalink to this headline">¶</a></h2>
+<p>A 5V 1A power supply is provided with the prototype panels, arena and
+controller. This supply is sufficient for operating roughly four panels - so
+enough for running the demo controller.  A higher current supply will likely be
+required in order to operate more than four panels. When selecting a power
+supply roughly 0.25A should be budgeted for each panel.  The connector is a
+2.1mm DC jack and the supply should be center positive.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">Introduction</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="communications.html">SPI and I2C Communications</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2014, IO Rodeo.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
