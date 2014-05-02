@@ -50,7 +50,7 @@ Comm Sub-Panels
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The comm sub-panel contains a single atmega328 micro-controller which
 communicates with the display controller over SPI. The comm sub-panel's sole
-resposibility is is to receive pattern data from the controller (via SPI) and
+resposibility is to receive pattern data from the controller (via SPI) and
 send it on to the driver sub-panel (via I2C). 
 
 .. figure:: _static/atmega_comm_front.png
