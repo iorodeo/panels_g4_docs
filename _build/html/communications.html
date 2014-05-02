@@ -107,14 +107,14 @@ first message are as follows:</p>
 <p>For 16-level gray scale each pixel is encoded by four bits so that each byte of
 the message consists of the data for two pixels. Columns are encoded first as
 follows:</p>
-<div class="highlight-C"><div class="highlight"><pre>i2cMessage[1] = pixel[0,0] | (pixel[0,1] &lt;&lt; 4);
-i2cMessage[2] = pixel[0,2] | (pixel[0,3] &lt;&lt; 4);
-i2cMessage[3] = pixel[0,4] | (pixel[0,5] &lt;&lt; 4);
-i2cMessage[4] = pixel[0,6] | (pixel[0,7] &lt;&lt; 4);
-i2cMessage[6] = pixel[1,0] | (pixel[1,0] &lt;&lt; 4);
-i2cMessage[7] = pixel[1,2] | (pixel[1,3] &lt;&lt; 4);
+<div class="highlight-C"><div class="highlight"><pre>i2cMessage[1] = pixel[0][0] | (pixel[0][1] &lt;&lt; 4);
+i2cMessage[2] = pixel[0][2] | (pixel[0][3] &lt;&lt; 4);
+i2cMessage[3] = pixel[0][4] | (pixel[0][5] &lt;&lt; 4);
+i2cMessage[4] = pixel[0][6] | (pixel[0][7] &lt;&lt; 4);
+i2cMessage[6] = pixel[1][0] | (pixel[1][0] &lt;&lt; 4);
+i2cMessage[7] = pixel[1][2] | (pixel[1][3] &lt;&lt; 4);
 ...
-i2cMessage[32] = pixel[7,6] | (pixel[7,7] &lt;&lt; 4);
+i2cMessage[32] = pixel[7][6] | (pixel[7][7] &lt;&lt; 4);
 </pre></div>
 </div>
 </div>
@@ -122,10 +122,10 @@ i2cMessage[32] = pixel[7,6] | (pixel[7,7] &lt;&lt; 4);
 <h3>I2C: 2-level Gray Scale<a class="headerlink" href="#i2c-2-level-gray-scale" title="Permalink to this headline">¶</a></h3>
 <p>For 2-level gray scale each pixels is encoded by one bit so that each byte of the message
 consists of the data for 8 pixels. Columns are encoded first as follows:</p>
-<div class="highlight-C"><div class="highlight"><pre>i2cMessage[1] = pixel[0,0] | (pixel[0,1] &lt;&lt; 1) | (pixel[0,2] &lt;&lt; 2) | (pixel[0,3] &lt;&lt; 3) | ... | (pixel[0,7] &lt;&lt; 7);
-i2cMessage[2] = pixel[1,0] | (pixel[1,1] &lt;&lt; 1) | (pixel[1,2] &lt;&lt; 2) | (pixel[1,3] &lt;&lt; 3) | ... | (pixel[1,7] &lt;&lt; 7);
+<div class="highlight-C"><div class="highlight"><pre>i2cMessage[1] = pixel[0][0] | (pixel[0][1] &lt;&lt; 1) | (pixel[0][2] &lt;&lt; 2) | (pixel[0][3] &lt;&lt; 3) | ... | (pixel[0][7] &lt;&lt; 7);
+i2cMessage[2] = pixel[1][0] | (pixel[1][1] &lt;&lt; 1) | (pixel[1][2] &lt;&lt; 2) | (pixel[1][3] &lt;&lt; 3) | ... | (pixel[1][7] &lt;&lt; 7);
 ...
-i2cMessage[8] = pixel[7,0] | (pixel[7,1] &lt;&lt; 1) | (pixel[7,2] &lt;&lt; 2) | (pixel[7,3] &lt;&lt; 3) | ... | (pixel[7,7] &lt;&lt; 7);
+i2cMessage[8] = pixel[7][0] | (pixel[7][1] &lt;&lt; 1) | (pixel[7][2] &lt;&lt; 2) | (pixel[7][3] &lt;&lt; 3) | ... | (pixel[7][7] &lt;&lt; 7);
 </pre></div>
 </div>
 </div>
@@ -139,7 +139,7 @@ on the panels - stacked one after the other. The data for matrix 0 is given firs
 followed by the data for matrix 1, etc.</p>
 <div class="section" id="spi-16-level-gray-scale">
 <h3>SPI: 16-level Gray Scale<a class="headerlink" href="#spi-16-level-gray-scale" title="Permalink to this headline">¶</a></h3>
-<p>For 16-level gray scale the bytes in the SPI  message are  as follows:</p>
+<p>The bytes in the SPI  message are  as follows:</p>
 <ul class="simple">
 <li>spiMessage[0-32] = i2c message for matrix 0</li>
 <li>spiMessage[33-65] = i2c message for matrix 1</li>
@@ -150,7 +150,7 @@ followed by the data for matrix 1, etc.</p>
 </div>
 <div class="section" id="spi-2-level-gray-scale">
 <h3>SPI: 2-level Gray Scale<a class="headerlink" href="#spi-2-level-gray-scale" title="Permalink to this headline">¶</a></h3>
-<p>For 2-level gray scale the bytes in the SPI message is as follows:</p>
+<p>The bytes in the SPI message is as follows:</p>
 <ul class="simple">
 <li>spiMessge[0-8] = i2c message for matrix 0</li>
 <li>spiMessage[9-17] = i2c message for matrix 1</li>

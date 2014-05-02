@@ -74,14 +74,14 @@ follows:
 
 .. code-block:: C
 
-     i2cMessage[1] = pixel[0,0] | (pixel[0,1] << 4);
-     i2cMessage[2] = pixel[0,2] | (pixel[0,3] << 4);
-     i2cMessage[3] = pixel[0,4] | (pixel[0,5] << 4);
-     i2cMessage[4] = pixel[0,6] | (pixel[0,7] << 4);
-     i2cMessage[6] = pixel[1,0] | (pixel[1,0] << 4);
-     i2cMessage[7] = pixel[1,2] | (pixel[1,3] << 4);
+     i2cMessage[1] = pixel[0][0] | (pixel[0][1] << 4);
+     i2cMessage[2] = pixel[0][2] | (pixel[0][3] << 4);
+     i2cMessage[3] = pixel[0][4] | (pixel[0][5] << 4);
+     i2cMessage[4] = pixel[0][6] | (pixel[0][7] << 4);
+     i2cMessage[6] = pixel[1][0] | (pixel[1][0] << 4);
+     i2cMessage[7] = pixel[1][2] | (pixel[1][3] << 4);
      ... 
-     i2cMessage[32] = pixel[7,6] | (pixel[7,7] << 4);
+     i2cMessage[32] = pixel[7][6] | (pixel[7][7] << 4);
 
 
 I2C: 2-level Gray Scale
@@ -91,10 +91,10 @@ consists of the data for 8 pixels. Columns are encoded first as follows:
 
 .. code-block:: C
 
-    i2cMessage[1] = pixel[0,0] | (pixel[0,1] << 1) | (pixel[0,2] << 2) | (pixel[0,3] << 3) | ... | (pixel[0,7] << 7);
-    i2cMessage[2] = pixel[1,0] | (pixel[1,1] << 1) | (pixel[1,2] << 2) | (pixel[1,3] << 3) | ... | (pixel[1,7] << 7);
+    i2cMessage[1] = pixel[0][0] | (pixel[0][1] << 1) | (pixel[0][2] << 2) | (pixel[0][3] << 3) | ... | (pixel[0][7] << 7);
+    i2cMessage[2] = pixel[1][0] | (pixel[1][1] << 1) | (pixel[1][2] << 2) | (pixel[1][3] << 3) | ... | (pixel[1][7] << 7);
     ...
-    i2cMessage[8] = pixel[7,0] | (pixel[7,1] << 1) | (pixel[7,2] << 2) | (pixel[7,3] << 3) | ... | (pixel[7,7] << 7);
+    i2cMessage[8] = pixel[7][0] | (pixel[7][1] << 1) | (pixel[7][2] << 2) | (pixel[7][3] << 3) | ... | (pixel[7][7] << 7);
 
 
 SPI Messages
@@ -108,7 +108,7 @@ followed by the data for matrix 1, etc.
 
 SPI: 16-level Gray Scale 
 """"""""""""""""""""""""""""""""""""""
-For 16-level gray scale the bytes in the SPI  message are  as follows: 
+The bytes in the SPI  message are  as follows: 
 
 * spiMessage[0-32] = i2c message for matrix 0
 * spiMessage[33-65] = i2c message for matrix 1
@@ -120,7 +120,7 @@ The total message length is 4*33 = 132 bytes.
 
 SPI: 2-level Gray Scale
 """"""""""""""""""""""""""""""""""""""
-For 2-level gray scale the bytes in the SPI message is as follows:
+The bytes in the SPI message is as follows:
 
 * spiMessge[0-8] = i2c message for matrix 0
 * spiMessage[9-17] = i2c message for matrix 1
