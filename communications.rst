@@ -8,25 +8,29 @@ Overview
 -------------------------------------
 
 Display data is sent from the controller to panels via SPI. Each panel, after
-receiving data, will display the pattern specified via the data received
-exactly once (one-shot display update). In order to continuously display a
-visual pattern - whether static or changing - the panels must receive display
-data at a fixed clock rate from the controller.  The exact frequency of this
-display update clock is not crucial, however for a consistent display intensity
-the clock rate should be constant.   Also, for the two gray scale
-modes supported by the panels - 16-level and 2-level - there is as maximum
-display update clock frequency.  Operating above this frequency is not advised
-as the panels will likely receive garbled data.  The maximum operating
-frequencies are:
+receiving data, will display the pattern specified via the data exactly once
+(one-shot display update). In order to continuously display a visual pattern -
+whether static or changing - the panels must receive display data at a fixed
+clock rate from the controller.  The exact frequency of this display update
+clock is not crucial, however for a consistent display intensity the clock rate
+should be constant.   Also, for the two gray scale modes supported by the
+panels - 16-level and 2-level - there is as maximum display update clock
+frequency.  Operating above this frequency is not advised as the panels will
+likely receive garbled data.  The maximum display update frequencies for the
+two gray scale modes are:
 
-* 16-level gray scale - 500Hz
-* 2-level gray scale 1500Hz.
++-----------------------+----------+
+| 16-level gray scale   |   500Hz  |
++-----------------------+----------+
+| 2-level gray scale    |  1500Hz  |
++-----------------------+----------+
 
 The duration of the one-shot display update performed by a panel is encoded in
-an byte sent with the display data. This duration parameter can be used to
-adjust the effective duty-cycle of the display  and can thus be used to control
-the brightness for a given update frequency. Note, using a larger (than default)
-display duration may decrease the maximum operating frequency.
+a byte sent with the display data for each LED Matrix. This duration parameter
+can be used to adjust the effective duty-cycle of the display and can thus be
+used to control the overall brightness of the matrix.  Note, using a larger
+(than default=0) display duration parameter may decrease the maximum operating
+frequency.
 
 For a given panel a display update is initiated when it receives data from the
 controller.  The data is first received (via SPI) by atmega328 micro-controller

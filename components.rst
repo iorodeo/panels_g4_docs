@@ -48,12 +48,10 @@ to the driver are ordered from  0 to 3 as shown in the image below.
 
 Comm Sub-Panels
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The comm sub-panel has a single atmega328 micro-controller which communicates
-with the system controller over SPI. The comm sub-panel is responsible for
-receiving pattern data from the controller (over SPI), it then splits the
-pattern data into four pieces (one for each LED matrix) ands sends this data on
-to the four atmega328 micro-controllers on it associated driver sub-panels over
-I2C. 
+The comm sub-panel contains a single atmega328 micro-controller which
+communicates with the display controller over SPI. The comm sub-panel's sole
+resposibility is is to receive pattern data from the controller (via SPI) and
+send it on to the driver sub-panel (via I2C). 
 
 .. figure:: _static/atmega_comm_front.png
    :align:  center
@@ -63,8 +61,8 @@ I2C.
 Test Arena 
 ------------------------------------ 
 The test arena is used to connect the panels with the controller and to supply
-power to the panels. There are three headers which can be used to connected the panels to the
-display controller.  
+power to the panels. There are three headers which can be used to connect the
+panels to the display controller.  
 
 * P22 40-Pin (2x20) single SPI bus header. 
 * P23 60_Pin (2x30) six SPI bus header.
@@ -76,7 +74,7 @@ display controller.
 5V power is supplied to the panels via 2.1mm DC jack, polarity is center positive. 
 
 There are 5 sets of jumpers which can be used to configure the
-arena.  (To do document jumper functions - for now refer to the arena schematic.)
+arena.  (TODO: document jumper functions - for now refer to the arena schematic.)
 
 :download:`Arena PCB Schematic  <_static/arena.pdf>`.
 

@@ -84,12 +84,10 @@ to the driver are ordered from  0 to 3 as shown in the image below.</p>
 </div>
 <div class="section" id="comm-sub-panels">
 <h3>Comm Sub-Panels<a class="headerlink" href="#comm-sub-panels" title="Permalink to this headline">¶</a></h3>
-<p>The comm sub-panel has a single atmega328 micro-controller which communicates
-with the system controller over SPI. The comm sub-panel is responsible for
-receiving pattern data from the controller (over SPI), it then splits the
-pattern data into four pieces (one for each LED matrix) ands sends this data on
-to the four atmega328 micro-controllers on it associated driver sub-panels over
-I2C.</p>
+<p>The comm sub-panel contains a single atmega328 micro-controller which
+communicates with the display controller over SPI. The comm sub-panel&#8217;s sole
+resposibility is is to receive pattern data from the controller (via SPI) and
+send it on to the driver sub-panel (via I2C).</p>
 <div class="figure align-center">
 <img alt="_images/atmega_comm_front.png" src="_images/atmega_comm_front.png" />
 </div>
@@ -99,8 +97,8 @@ I2C.</p>
 <div class="section" id="test-arena">
 <h2>Test Arena<a class="headerlink" href="#test-arena" title="Permalink to this headline">¶</a></h2>
 <p>The test arena is used to connect the panels with the controller and to supply
-power to the panels. There are three headers which can be used to connected the panels to the
-display controller.</p>
+power to the panels. There are three headers which can be used to connect the
+panels to the display controller.</p>
 <ul class="simple">
 <li>P22 40-Pin (2x20) single SPI bus header.</li>
 <li>P23 60_Pin (2x30) six SPI bus header.</li>
@@ -111,7 +109,7 @@ display controller.</p>
 </div>
 <p>5V power is supplied to the panels via 2.1mm DC jack, polarity is center positive.</p>
 <p>There are 5 sets of jumpers which can be used to configure the
-arena.  (To do document jumper functions - for now refer to the arena schematic.)</p>
+arena.  (TODO: document jumper functions - for now refer to the arena schematic.)</p>
 <p><a class="reference download internal" href="_downloads/arena.pdf"><tt class="xref download docutils literal"><span class="pre">Arena</span> <span class="pre">PCB</span> <span class="pre">Schematic</span></tt></a>.</p>
 </div>
 <div class="section" id="demo-controller">
