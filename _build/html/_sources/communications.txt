@@ -129,3 +129,18 @@ For 2-level gray scale the bytes in the SPI message is as follows:
 * spiMessage[27-35] = i2c message for matrix 3
 
 The total message length is 4*9 = 36 bytes.
+
+SPI: Parameters 
+""""""""""""""""""""""""""""""""""""""
+
++-----------------+---------------+
+| Parameter       | Value         |
++=================+===============+
+| Bit Order       | MSBFIRST      |
++-----------------+---------------+
+| Data Mode       | Mode 0        |
++-----------------+---------------+
+| Maximum Clock   | 4Mhz          |
++-----------------+---------------+
+
+
