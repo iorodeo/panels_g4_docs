@@ -102,9 +102,8 @@ SPI Messages
 In this section  the format of the SPI messages sent from the controller to the
 comm sub-panels is described.
 
-
 The SPI message simply consists of four I2C messages - one for each matrix
-on the panels - tacked end to end. The data for matrix 0 is given first,
+on the panels - stacked one after the other. The data for matrix 0 is given first,
 followed by the data for matrix 1, etc. 
 
 SPI: 16-level Gray Scale 
